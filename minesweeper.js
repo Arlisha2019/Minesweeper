@@ -20,6 +20,7 @@ let generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
      }
      board.push(rows);
     }
+    let numberOfBombsPlaced = 0;
     while (numberOfBombsPlaced < numberOfBombs) {
       let randomRowIndex = Math.floor(Math.random() * numberOfRows);
       let randomColumnIndex = Math.floor(Math.random() * numberOfColumns);
@@ -29,17 +30,18 @@ let generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
       }
       // This code in your while loop has the potential to place bombs on top of already existing bombs. This will be fixed when learn about control flow.
     }
+    return board;
 };
 const getNumberOfNeighborBombs = (bombBoard, rowIndex, columnIndex) => {
 const neighborOffsets = [
- [-1, -1],
- [1, 0],
- [-1, 1],
- [0, 0],
  [0, 1],
  [1, 1],
+ [-1, 1],
  [0, -1],
- [1, -1]];
+ [-1, -1],
+ [1, -1],
+ [0, 1],
+ [1, 0]];
 const numberOfRows = bombBoard.length;
 const numberOfColumns = bombBoard[0].length;
 let numberOfBombs = 0;
@@ -48,24 +50,22 @@ let numberOfBombs = 0;
   const neighborColumnIndex = columnIndex + offset[1];
   if (neighborRowIndex >= 0 && neighborRowIndex < numberOfRows && neighborColumnIndex >= 0 && neighborColumnIndex < numberOfColumns) {
     if(bombBoard[neighborRowIndex][neighborColumnIndex] =='B') {
-      bombBoard[randomRowIndex][randomColumnIndex] = 'B';
       numberOfBombs++;
-      let numberOfBombsPlaced = 0;
-
     }
   }
 });
 return numberOfBombs;
 }
 
+
 const flipTile = (playerBoard, bombBoard, rowIndex, columnIndex) => {
 if (playerBoard[rowIndex][columnIndex] !== ' ') {
- console.log('This tile has already flipped!');
+ return;
 } else if (bombBoard[rowIndex][columnIndex] === 'B') {
  playerBoard[rowIndex][columnIndex] = 'B';
 } else {
   playerBoard[rowIndex][columnIndex] = getNumberOfNeighborBombs(bombBoard, rowIndex, columnIndex);
-  return;
+
 }
 }
 const printBoard = board => {
