@@ -9,7 +9,7 @@ for (let rows = 0; rows < numberOfRows; rows++) {
   }
   return board;
 };
-console.log(generatePlayerBoard());
+
 
 let generateBombBoard = (numberOfRows, numberOfColumns, numberOfBombs) => {
   let board = [];
