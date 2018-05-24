@@ -44,7 +44,7 @@ get playerBoard() {
    }
    hasSafeTiles() {
     return this._numberOfTiles !== this._numberOfBombs;
-     }
+
    }
    static generatePlayerBoard(numberOfRows, numberOfColumns) {
    let board = [];
@@ -79,15 +79,11 @@ get playerBoard() {
        return board;
    };
 }
-
-
-
-
-
-}
 print(board) {
 console.log(board.map(row => row.join(' | ')).join('\n'));
-  };
+  }
+}
+
 
 
 let this._playerBoard = generatePlayerBoard(3, 3);
